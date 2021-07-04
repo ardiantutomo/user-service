@@ -1,0 +1,22 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+# panggil gqlgen generate abis update ini
+
+type User {
+  email: String!
+  number: Float!
+}
+
+input UserInput {
+  email: String!
+  number: Float!
+}
+
+type Mutation {
+  CreateUser(input: UserInput!): User!
+}
+
+type Query {
+  GetAllUsers: [User!]!
+}
