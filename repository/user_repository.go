@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"errors"
 	"log"
 	"user-service/graph/model"
 
@@ -34,6 +35,9 @@ func (u userRepository) Migrate() error {
 func (u userRepository) Save(user model.User) (model.User, error) {
 	log.Print("[UserRepository]...Save")
 	err := u.DB.Create(&user).Error
+	if err != nil {
+		err = errors.New("Email is already registered")
+	}
 	return user, err
 
 }
