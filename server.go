@@ -1,14 +1,14 @@
 package main
 
 import (
-	"go-graphql-clean/graph"
-	"go-graphql-clean/graph/generated"
-	modeldb "go-graphql-clean/model"
-	"go-graphql-clean/repository"
-	"go-graphql-clean/service"
 	"log"
 	"net/http"
 	"os"
+	"user-service/graph"
+	"user-service/graph/generated"
+	modeldb "user-service/model"
+	"user-service/repository"
+	"user-service/service"
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
@@ -23,9 +23,14 @@ func main() {
 	}
 
 	db, _ := modeldb.DBConnection()
+
 	userRepo := repository.NewUserRepository(db)
+	if err := userRepo.Migrate(); err != nil {
+		log.Fatal("User migrate err", err)
+	}
 	userService := service.NewUserService(userRepo)
 	userResolver := graph.NewUserResolver(userService)
+
 	userHandler := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{
 		Resolvers: userResolver,
 	}))

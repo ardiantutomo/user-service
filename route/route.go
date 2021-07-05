@@ -1,10 +1,10 @@
 package route
 
 // import (
-// 	"go-graphql-clean/controller"
-// 	"go-graphql-clean/middleware"
-// 	"go-graphql-clean/repository"
-// 	"go-graphql-clean/service"
+// 	"user-service/controller"
+// 	"user-service/middleware"
+// 	"user-service/repository"
+// 	"user-service/service"
 // 	"log"
 
 // 	"github.com/gin-gonic/gin"

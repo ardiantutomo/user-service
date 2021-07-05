@@ -5,20 +5,25 @@ package graph
 
 import (
 	"context"
-	"go-graphql-clean/graph/generated"
-	"go-graphql-clean/graph/model"
+	"user-service/graph/generated"
+	"user-service/graph/model"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
 func (r *mutationResolver) CreateUser(ctx context.Context, input model.UserInput) (*model.User, error) {
 	user := model.User{}
+	user.Fullname = input.Fullname
 	user.Email = input.Email
-	user.Number = input.Number
+	hash, _ := bcrypt.GenerateFromPassword([]byte(input.Password), bcrypt.MinCost)
+	user.Password = string(hash)
 	res, err := r.userService.Save(user)
 	return &res, err
 }
 
 func (r *queryResolver) GetAllUsers(ctx context.Context) ([]*model.User, error) {
 	res, err := r.userService.GetAll()
+	r.users = []*model.User{}
 	for _, data := range res {
 		r.users = append(r.users, &data)
 	}

@@ -1,8 +1,8 @@
 package service
 
 import (
-	"go-graphql-clean/graph/model"
-	"go-graphql-clean/repository"
+	"user-service/graph/model"
+	"user-service/repository"
 )
 
 // UserService : represent the user's service contract
@@ -21,6 +21,8 @@ func NewUserService(r repository.UserRepository) UserService {
 		userRepository: r,
 	}
 }
+
+// fungsi untuk ke repositori
 func (u userService) Save(user model.User) (model.User, error) {
 	return u.userRepository.Save(user)
 }

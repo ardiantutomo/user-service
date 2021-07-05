@@ -1,9 +1,8 @@
 package repository
 
 import (
-	"errors"
-	"go-graphql-clean/graph/model"
 	"log"
+	"user-service/graph/model"
 
 	"gorm.io/gorm"
 )
@@ -16,8 +15,6 @@ type userRepository struct {
 type UserRepository interface {
 	Save(model.User) (model.User, error)
 	GetAll() ([]model.User, error)
-	IncrementMoney(uint, float64) error
-	DecrementMoney(uint, float64) error
 	WithTrx(*gorm.DB) userRepository
 	Migrate() error
 }
@@ -55,15 +52,4 @@ func (u userRepository) WithTrx(trxHandle *gorm.DB) userRepository {
 	}
 	u.DB = trxHandle
 	return u
-}
-
-func (u userRepository) IncrementMoney(receiver uint, amount float64) error {
-	log.Print("[UserRepository]...Increment Money")
-	return u.DB.Model(&model.User{}).Where("id=?", receiver).Update("wallet", gorm.Expr("wallet + ?", amount)).Error
-}
-
-func (u userRepository) DecrementMoney(giver uint, amount float64) error {
-	log.Print("[UserRepository]...Decrement Money")
-	return errors.New("something")
-	// return u.DB.Model(&model.User{}).Where("id=?", giver).Update("wallet", gorm.Expr("wallet - ?", amount)).Error
 }

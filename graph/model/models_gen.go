@@ -3,11 +3,13 @@
 package model
 
 type User struct {
-	Email  string  `json:"email"`
-	Number float64 `json:"number"`
+	Fullname string `json:"fullname"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
 }
 
 type UserInput struct {
-	Email  string  `json:"email"`
-	Number float64 `json:"number"`
+	Fullname string `json:"fullname"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
 }

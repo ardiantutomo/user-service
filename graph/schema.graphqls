@@ -4,13 +4,15 @@
 # panggil gqlgen generate abis update ini
 
 type User {
+  fullname: String!
   email: String!
-  number: Float!
+  password: String!
 }
 
 input UserInput {
+  fullname: String!
   email: String!
-  number: Float!
+  password: String!
 }
 
 type Mutation {

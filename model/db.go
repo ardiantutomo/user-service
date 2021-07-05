@@ -29,6 +29,7 @@ func DBConnection() (*gorm.DB, error) {
 	)
 
 	url := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Shanghai", HOST, USER, PASS, DBNAME, PORT)
+
 	return gorm.Open(postgres.New(postgres.Config{
 		DSN:                  url,
 		PreferSimpleProtocol: true, // disables implicit prepared statement usage

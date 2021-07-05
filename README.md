@@ -1,4 +1,4 @@
-# go-graphql-clean
+# user-service
 
 Thanks to:
 - alexzimmer96

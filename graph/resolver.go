@@ -1,8 +1,8 @@
 package graph
 
 import (
-	"go-graphql-clean/graph/model"
-	"go-graphql-clean/service"
+	"user-service/graph/model"
+	"user-service/service"
 )
 
 type Resolver struct {
